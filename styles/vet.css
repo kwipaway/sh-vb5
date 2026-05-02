@@ -499,4 +499,5 @@ h1, h2, h3 {
 
 .people-grid {
     margin-top: 40px;
+    gap: 30;
 }
