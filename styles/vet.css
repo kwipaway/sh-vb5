@@ -518,3 +518,7 @@ h1, h2, h3 {
 .appointment-btn:hover {
   background-color: #0a3f45;
 }
+
+.center-wrapper {
+  text-align: center;
+}
