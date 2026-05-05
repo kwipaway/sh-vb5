@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veterans Benefits Processing | Sam Houston State University</title>
-  <link rel="stylesheet" href="styles/vet.css"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veterans Benefits Processing | Sam Houston State University</title>
+    <link rel="stylesheet" href="styles/vet.css"> 
 </head>
 <body>
 
-  <div class="main-wrapper">
-     
+<div class="main-wrapper">
+    
     <nav class="sidebar">
         <ul>
-            <li><a href="vet.html">Veterans Benefits Processing</a></li>
+            <li><a href="vet.html" class="active">Veterans Benefits Processing</a></li>
             <li><a href="faq.html">Frequently Asked Questions</a></li>
+            <li><a href="files/va-checklist.pdf" target="_blank">VA Student Checklist</a></li>
             <li><a href="contactt.html">People</a></li>
             <li><a href="activeduty.html">Active Duty Students</a></li>
             <li><a href="federal.html">Federal Benefits</a></li>
@@ -24,75 +25,159 @@
 
     <main class="content-area">
 
-      <div class="header-image-container">
-        <img src="images/vets.webp" alt="Veterans Benefits Processing Banner">
-        <div class="header-image-overlay">
-          <h1>VETERANS BENEFITS PROCESSING</h1>
+        <div class="header-image-container">
+            <img src="images/vets.webp" alt="Veterans Benefits Processing Banner">
+            <div class="header-image-overlay">
+                <h1>VETERANS BENEFITS PROCESSING</h1>
+            </div>
         </div>
-      </div>
-       
-      <div class="inner-content">
-        <section class="hero">
-          <h2>Use Your Benefits</h2>
-          <p>Created in 2023, our department provides personalized assistance as you navigate utilizing your veteran and dependent education benefits. Whether you are a veteran, an active service member, or a dependent, our team ensures your transition to SHSU is seamless.</p>
-          <a href="https://experience.elluciancloud.com/shsu107/" class="btn-primary">Access Online Certification Portal</a>
-          <span class="alert-text">Notice: All documents must be submitted through our online portal. Emailed, faxed, or mailed documents will not be accepted.</span>
-        </section>
+        
+        <div class="inner-content">
+            <section class="hero">
+                <h2>Use Your Benefits</h2>
+                <p>Created in 2023, our department provides personalized assistance as you navigate utilizing your veteran and dependent education benefits. Whether you are a veteran, an active service member, or a dependent, our team ensures your transition to SHSU is seamless.</p>
+                <a href="https://www.shsu.edu/academics/online/" class="btn-primary">Access Online Certification Portal</a>
+                <span class="alert-text">Notice: All documents must be submitted through our online portal. Emailed, faxed, or mailed documents will not be accepted.</span>
+            </section>
 
-        <section class="benefits-grid">
-           
-          <div class="card">
-            <h3>Federal Benefits</h3>
-            <p>VA educational benefits are federal benefits earned by a service member or veteran. Entitlement can change due to length of service, discharge characterization, and home of record.</p>
-            <p>Stop waiting on hold—use our step-by-step portal to upload your Certificate of Eligibility (COE) and register your classes for the upcoming term.</p>
-            <a href="blank.html" class="text-link">View VA Submission Steps →</a>
-          </div>
+            <section class="benefits-grid">
+                
+                <div class="card">
+                    <h3>Federal Benefits</h3>
+                    <p>VA educational benefits are federal benefits earned by a service member or veteran. Entitlement can change due to length of service, discharge characterization, and home of record.</p>
+                    <p>Stop waiting on hold—use our step-by-step portal to upload your Certificate of Eligibility (COE) and register your classes for the upcoming term.</p>
+                    <a href="federal.html" class="text-link">View VA Submission Steps →</a>
+                </div>
 
-          <div class="card">
-            <h3>Hazlewood Benefit</h3>
-            <p>The Lone Star State thanks you for your service. The Hazlewood Act provides eligible veterans, spouses, and dependents with up to 150 credit hours of tuition exemption.</p>
-            <p>Submit your Hazlewood semester waivers directly through the portal before the fee payment deadline to ensure your account is credited on time.</p>
-            <a href="blank.html" class="text-link">View Hazlewood Waiver Steps →</a>
-          </div>
+                <div class="card">
+                    <h3>Hazlewood Benefit</h3>
+                    <p>The Lone Star State thanks you for your service. The Hazlewood Act provides eligible veterans, spouses, and dependents with up to 150 credit hours of tuition exemption.</p>
+                    <p>Submit your Hazlewood semester waivers directly through the portal before the fee payment deadline to ensure your account is credited on time.</p>
+                    <a href="hazlewood.html" class="text-link">View Hazlewood Waiver Steps →</a>
+                </div>
 
-        </section>
-      </div>
+            </section>
+        </div>
     </main>
-  </div>
-    <script>
- window.difyChatbotConfig = {
-  token: 'm8kiOjZHH3viXVnw',
-  inputs: {
-    // You can define the inputs from the Start node here
-    // key is the variable name
-    // e.g.
-    // name: "NAME"
-  },
-  systemVariables: {
-    // user_id: 'YOU CAN DEFINE USER ID HERE',
-    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
-  },
-  userVariables: {
-    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
-    // name: 'YOU CAN DEFINE USER NAME HERE',
-  },
- }
+</div>
+
+<div id="vbp-chatbot-container" title="Click to chat with VBP-2026">Ask<br>VBP</div>
+
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        VBP-2026 Assistant
+        <button id="closeChat">X</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">Hello! I am VBP-2026. Do you have questions about VA Benefits, the Hazlewood Act, or the Certification Portal?</div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+        <button id="sendBtn">Send</button>
+    </div>
+</div>
+
+<script>
+    // Chatbot UI Logic (Opening, Closing, Sending)
+    const chatbotContainer = document.getElementById('vbp-chatbot-container');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeChat = document.getElementById('closeChat');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const chatMessages = document.getElementById('chatMessages');
+
+    chatbotContainer.addEventListener('click', () => {
+        chatWindow.style.display = 'flex';
+        chatbotContainer.style.display = 'none';
+    });
+
+    closeChat.addEventListener('click', () => {
+        chatWindow.style.display = 'none';
+        chatbotContainer.style.display = 'flex';
+    });
+
+    function sendMessage() {
+        const text = chatInput.value.trim();
+        if (text === '') return;
+
+        addMessage(text, 'user-message');
+        chatInput.value = '';
+
+        // Add a slight delay to make the bot feel natural
+        setTimeout(() => {
+            const response = getBotResponse(text.toLowerCase());
+            addMessage(response, 'bot-message');
+        }, 600);
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    function addMessage(text, className) {
+        const msgDiv = document.createElement('div');
+        msgDiv.classList.add('message', className);
+        msgDiv.textContent = text;
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // ==========================================
+    // THE AI KNOWLEDGE BASE (From your CSV)
+    // ==========================================
+    function getBotResponse(input) {
+        const cleanInput = input.toLowerCase();
+
+        // This array acts as your database. You can add as many blocks as you want!
+        const faqDatabase = [
+            {
+                // Military Science & ROTC queries from the CSV file
+                keywords: [
+                    "rotc", "military science", "veteran class", "vets class", "veterans class", 
+                    "class for veterans", "classes for vets", "classes for veterans", "shsu vet class", 
+                    "shsu veterans class", "class for vets at shsu", "rotc classes", "military science classes", 
+                    "set up military classes", "set up vet classes"
+                ],
+                answer: "If you have any interest in enrolling in Military Science courses please contact the Department of Military Science (ROTC) at 936-294-4994."
+            },
+            {
+                // Hazlewood queries
+                keywords: ["hazlewood", "hazelwood", "waiver", "legacy"],
+                answer: "To use the Hazlewood Act, you must submit a semester waiver directly through our online certification portal before the fee payment deadline. Do you need the link to the portal?"
+            },
+            {
+                // VA / Federal queries
+                keywords: ["va", "gi bill", "federal", "coe", "certificate of eligibility", "ch 33", "ch 35", "chapter 33"],
+                answer: "For VA educational benefits, please upload your Certificate of Eligibility (COE) using our step-by-step online portal."
+            },
+            {
+                // Portal & Submission queries
+                keywords: ["portal", "submit", "link", "where do i apply", "upload"],
+                answer: "You can access the certification portal by clicking the main 'Access Online Certification Portal' button on the homepage. Please remember we do not accept emailed or faxed documents."
+            },
+            {
+                // Contact queries
+                keywords: ["contact", "call", "phone", "where", "location", "people", "office"],
+                answer: "We are located in the Estill Building, Suite 228. You can also reach us at vetbenefits@shsu.edu or call 936-294-1440."
+            }
+        ];
+
+        // The Search Engine: Loop through the database to find a keyword match
+        for (let i = 0; i < faqDatabase.length; i++) {
+            let entry = faqDatabase[i];
+            
+            for (let j = 0; j < entry.keywords.length; j++) {
+                if (cleanInput.includes(entry.keywords[j])) {
+                    return entry.answer; // Match found, spit out the answer!
+                }
+            }
+        }
+
+        // DEFAULT FALLBACK (If the user asks something not in the database)
+        return "I am still learning! For now, I can help with Hazlewood waivers, VA benefits, Military Science (ROTC), and finding the online portal. What would you like to know?";
+    }
 </script>
-<script
- src="https://udify.app/embed.min.js"
- id="m8kiOjZHH3viXVnw"
- defer>
-</script>
-<style>
-  #dify-chatbot-bubble-button {
-    background-color: #1C64F2 !important;
-  }
-  #dify-chatbot-bubble-window {
-    width: 24rem !important;
-    height: 40rem !important;
-  }
-</style>
-    
-  
 </body>
 </html>
