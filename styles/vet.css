@@ -504,3 +504,17 @@ h1, h2, h3 {
 .people-card {
     margin-top: 40px;
 }
+.appointment-btn {
+  display: inline-block;
+  background-color: #0d4f57; 
+  color: white;
+  text-decoration: none;
+  padding: 15px 30px;
+  font-weight: bold;
+  border-radius: 0 40px 40px 0; 
+  font-family: Arial, sans-serif;
+}
+
+.appointment-btn:hover {
+  background-color: #0a3f45;
+}
