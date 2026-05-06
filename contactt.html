@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>People | Veterans Benefits Processing</title>
-    <link rel="stylesheet" href="../styles/vet.css">
+    <link rel="stylesheet" href="styles/vet.css">
 </head>
 <body>
 
 <div class="main-wrapper">
-    <nav class="sidebar">
+    <nav class="sidebar" aria-label="Main Navigation">
         <ul>
-            <li><a href="../vet.html">Veterans Benefits Processing</a></li>
+            <li><a href="vet.html">Veterans Benefits Processing</a></li>
             <li><a href="faq.html">Frequently Asked Questions</a></li>
-            <li><a href="contactt.html">Contact The Team</a></li>
+            <li><a href="contactt.html" class="active">People</a></li>
             <li><a href="activeduty.html">Active Duty Students</a></li>
             <li><a href="federal.html">Federal Benefits</a></li>
             <li><a href="hazlewood.html">Hazlewood</a></li>
@@ -21,18 +21,18 @@
         </ul>
     </nav>
 
-    <main class="content-area" style="background-color: var(--shsu-white);">
+    <main class="content-area">
         <div class="inner-content">
             
-            <h1 class="giant-orange-title" style="margin-bottom: 30px;">VETERANS BENEFITS PROCESSING</h1>
+            <h1 class="giant-orange-title">VETERANS BENEFITS PROCESSING</h1>
 
             <div class="people-search-wrapper">
-                <input type="text" class="people-search-input" placeholder="Search">
-                <button class="people-search-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" class="people-search-input" placeholder="Search" aria-label="Search for staff">
+                <button class="people-search-btn" aria-label="Submit Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </button>
-                <button class="people-search-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.92-10.26l5.08 5.08"></path></svg>
+                <button class="people-search-btn" aria-label="Refresh Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.92-10.26l5.08 5.08"></path></svg>
                 </button>
             </div>
 
@@ -88,15 +88,17 @@
     </main>
 </div>
 
-<div id="vbp-chatbot-container" title="Click to chat with VBP-2026">Ask<br>VBP</div>
+<button id="vbp-chatbot-container" title="Click to chat with VBP-2026" aria-label="Open Chatbot">
+    Ask<br>VBP
+</button>
 
-<div class="chat-window" id="chatWindow">
-    <div class="chat-header">VBP-2026 Assistant<button id="closeChat">X</button></div>
-    <div class="chat-messages" id="chatMessages">
+<div class="chat-window" id="chatWindow" role="dialog" aria-modal="true" aria-label="Chatbot Window">
+    <div class="chat-header">VBP-2026 Assistant<button id="closeChat" aria-label="Close Chat">X</button></div>
+    <div class="chat-messages" id="chatMessages" aria-live="polite">
         <div class="message bot-message">Hello! I am VBP-2026. Do you have questions about VA Benefits, the Hazlewood Act, or the Certification Portal?</div>
     </div>
     <div class="chat-input-area">
-        <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+        <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off" aria-label="Type a message to the chatbot">
         <button id="sendBtn">Send</button>
     </div>
 </div>
@@ -113,6 +115,7 @@
     chatbotContainer.addEventListener('click', () => {
         chatWindow.style.display = 'flex';
         chatbotContainer.style.display = 'none';
+        chatInput.focus();
     });
 
     closeChat.addEventListener('click', () => {
@@ -136,7 +139,10 @@
     sendBtn.addEventListener('click', sendMessage);
 
     chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') sendMessage();
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMessage();
+        }
     });
 
     function addMessage(text, className) {
