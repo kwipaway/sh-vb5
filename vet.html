@@ -10,16 +10,16 @@
 
 <div class="main-wrapper">
     
-    <nav class="sidebar">
+    <nav class="sidebar" aria-label="Main Navigation">
         <ul>
             <li><a href="vet.html" class="active">Veterans Benefits Processing</a></li>
             <li><a href="faq.html">Frequently Asked Questions</a></li>
-            <li><a href="files/va-checklist.pdf" target="_blank">VA Student Checklist</a></li>
+            <li><a href="files/va-checklist.pdf" target="_blank" rel="noopener noreferrer">VA Student Checklist</a></li>
             <li><a href="contactt.html">People</a></li>
             <li><a href="activeduty.html">Active Duty Students</a></li>
             <li><a href="federal.html">Federal Benefits</a></li>
             <li><a href="hazlewood.html">Hazlewood</a></li>
-            <li><a href="blank.html">Veterans and Military Connected Center</a></li>
+            <li><a href="#">Veterans and Military Connected Center</a></li>
         </ul>
     </nav>
 
@@ -36,49 +36,50 @@
             <section class="hero">
                 <h2>Use Your Benefits</h2>
                 <p>Created in 2023, our department provides personalized assistance as you navigate utilizing your veteran and dependent education benefits. Whether you are a veteran, an active service member, or a dependent, our team ensures your transition to SHSU is seamless.</p>
-                <a href="https://www.shsu.edu/academics/online/" class="btn-primary">Access Online Certification Portal</a>
-                <span class="alert-text">Notice: All documents must be submitted through our online portal. Emailed, faxed, or mailed documents will not be accepted.</span>
+                <a href="#" class="btn-primary">Access Online Certification Portal</a>
+                <p class="alert-text">Notice: All documents must be submitted through our online portal. Emailed, faxed, or mailed documents will not be accepted.</p>
             </section>
 
-            <section class="benefits-grid">
+            <div class="benefits-grid">
                 
                 <div class="card">
                     <h3>Federal Benefits</h3>
                     <p>VA educational benefits are federal benefits earned by a service member or veteran. Entitlement can change due to length of service, discharge characterization, and home of record.</p>
                     <p>Stop waiting on hold—use our step-by-step portal to upload your Certificate of Eligibility (COE) and register your classes for the upcoming term.</p>
-                    <a href="federal.html" class="text-link">View VA Submission Steps →</a>
+                    <a href="federal.html" class="text-link">View VA Submission Steps &rarr;</a>
                 </div>
 
                 <div class="card">
                     <h3>Hazlewood Benefit</h3>
                     <p>The Lone Star State thanks you for your service. The Hazlewood Act provides eligible veterans, spouses, and dependents with up to 150 credit hours of tuition exemption.</p>
                     <p>Submit your Hazlewood semester waivers directly through the portal before the fee payment deadline to ensure your account is credited on time.</p>
-                    <a href="hazlewood.html" class="text-link">View Hazlewood Waiver Steps →</a>
+                    <a href="hazlewood.html" class="text-link">View Hazlewood Waiver Steps &rarr;</a>
                 </div>
 
-            </section>
+            </div>
         </div>
     </main>
 </div>
 
-<div id="vbp-chatbot-container" title="Click to chat with VBP-2026">Ask<br>VBP</div>
+<button id="vbp-chatbot-container" title="Click to chat with VBP-2026" aria-label="Open Chatbot">
+    Ask<br>VBP
+</button>
 
-<div class="chat-window" id="chatWindow">
+<div class="chat-window" id="chatWindow" role="dialog" aria-modal="true" aria-label="Chatbot Window">
     <div class="chat-header">
         VBP-2026 Assistant
-        <button id="closeChat">X</button>
+        <button id="closeChat" aria-label="Close Chat">X</button>
     </div>
-    <div class="chat-messages" id="chatMessages">
+    <div class="chat-messages" id="chatMessages" aria-live="polite">
         <div class="message bot-message">Hello! I am VBP-2026. Do you have questions about VA Benefits, the Hazlewood Act, or the Certification Portal?</div>
     </div>
     <div class="chat-input-area">
-        <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+        <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off" aria-label="Type a message to the chatbot">
         <button id="sendBtn">Send</button>
     </div>
 </div>
 
 <script>
-    // Chatbot UI Logic (Opening, Closing, Sending)
     const chatbotContainer = document.getElementById('vbp-chatbot-container');
     const chatWindow = document.getElementById('chatWindow');
     const closeChat = document.getElementById('closeChat');
@@ -89,6 +90,7 @@
     chatbotContainer.addEventListener('click', () => {
         chatWindow.style.display = 'flex';
         chatbotContainer.style.display = 'none';
+        chatInput.focus();
     });
 
     closeChat.addEventListener('click', () => {
@@ -103,7 +105,6 @@
         addMessage(text, 'user-message');
         chatInput.value = '';
 
-        // Add a slight delay to make the bot feel natural
         setTimeout(() => {
             const response = getBotResponse(text.toLowerCase());
             addMessage(response, 'bot-message');
@@ -113,7 +114,10 @@
     sendBtn.addEventListener('click', sendMessage);
 
     chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') sendMessage();
+        if (e.key === 'Enter') {
+            e.preventDefault(); 
+            sendMessage();
+        }
     });
 
     function addMessage(text, className) {
@@ -124,16 +128,11 @@
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // ==========================================
-    // THE AI KNOWLEDGE BASE (From your CSV)
-    // ==========================================
     function getBotResponse(input) {
         const cleanInput = input.toLowerCase();
 
-        // This array acts as your database. You can add as many blocks as you want!
         const faqDatabase = [
             {
-                // Military Science & ROTC queries from the CSV file
                 keywords: [
                     "rotc", "military science", "veteran class", "vets class", "veterans class", 
                     "class for veterans", "classes for vets", "classes for veterans", "shsu vet class", 
@@ -143,39 +142,33 @@
                 answer: "If you have any interest in enrolling in Military Science courses please contact the Department of Military Science (ROTC) at 936-294-4994."
             },
             {
-                // Hazlewood queries
                 keywords: ["hazlewood", "hazelwood", "waiver", "legacy"],
                 answer: "To use the Hazlewood Act, you must submit a semester waiver directly through our online certification portal before the fee payment deadline. Do you need the link to the portal?"
             },
             {
-                // VA / Federal queries
                 keywords: ["va", "gi bill", "federal", "coe", "certificate of eligibility", "ch 33", "ch 35", "chapter 33"],
                 answer: "For VA educational benefits, please upload your Certificate of Eligibility (COE) using our step-by-step online portal."
             },
             {
-                // Portal & Submission queries
                 keywords: ["portal", "submit", "link", "where do i apply", "upload"],
                 answer: "You can access the certification portal by clicking the main 'Access Online Certification Portal' button on the homepage. Please remember we do not accept emailed or faxed documents."
             },
             {
-                // Contact queries
                 keywords: ["contact", "call", "phone", "where", "location", "people", "office"],
                 answer: "We are located in the Estill Building, Suite 228. You can also reach us at vetbenefits@shsu.edu or call 936-294-1440."
             }
         ];
 
-        // The Search Engine: Loop through the database to find a keyword match
         for (let i = 0; i < faqDatabase.length; i++) {
             let entry = faqDatabase[i];
             
             for (let j = 0; j < entry.keywords.length; j++) {
                 if (cleanInput.includes(entry.keywords[j])) {
-                    return entry.answer; // Match found, spit out the answer!
+                    return entry.answer; 
                 }
             }
         }
 
-        // DEFAULT FALLBACK (If the user asks something not in the database)
         return "I am still learning! For now, I can help with Hazlewood waivers, VA benefits, Military Science (ROTC), and finding the online portal. What would you like to know?";
     }
 </script>
